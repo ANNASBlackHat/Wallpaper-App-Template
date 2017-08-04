@@ -1,0 +1,31 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="image"
+            type="String"/>
+    </data>
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="230dp">
+        <ImageView
+            tools:src="@mipmap/ic_launcher"
+            android:id="@+id/img_wallpaper"
+            android:scaleType="centerCrop"
+            android:src="@{image}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Button
+            android:text="Set as wallpaper"
+            android:layout_alignParentBottom="true"
+            android:textAllCaps="false"
+            android:minHeight="0dp"
+            android:padding="12dp"
+            android:textColor="@android:color/white"
+            android:background="#662E2E2E"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</layout>
