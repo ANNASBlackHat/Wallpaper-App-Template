@@ -17,7 +17,7 @@ public class WallpaperData {
                 "http://www.mrwallpaper.com/wallpapers/asian-girl-with-katana.jpg",
                 "https://s-media-cache-ak0.pinimg.com/originals/c5/9a/0a/c59a0a0fae69b71eddce2c118cd936f5.jpg",
                 "https://www.walldevil.com/wallpapers/w03/938520-3d-artwork-asian-architecture-asians-cityscapes-digital-art.jpg",
-                "http://d3gnp09177mxuh.cloudfront.net/tech-page-images/java.png",gi
+                "http://d3gnp09177mxuh.cloudfront.net/tech-page-images/java.png",
                 "https://static.pexels.com/photos/257360/pexels-photo-257360.jpeg"));
     }
 }
