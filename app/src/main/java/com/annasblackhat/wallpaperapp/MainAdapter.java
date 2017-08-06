@@ -2,6 +2,7 @@ package com.annasblackhat.wallpaperapp;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.annasblackhat.wallpaperapp.databinding.ListItemImageBinding;
@@ -27,9 +28,16 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(MainViewHolder holder, int position) {
+    public void onBindViewHolder(final MainViewHolder holder, final int position) {
         holder.getBinding().setVariable(com.annasblackhat.wallpaperapp.BR.image, wallpapers.get(position));
         holder.getBinding().executePendingBindings();
+
+        ((ListItemImageBinding)holder.getBinding()).btnSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)holder.getContext()).setWallpaper(position);
+            }
+        });
     }
 
     @Override

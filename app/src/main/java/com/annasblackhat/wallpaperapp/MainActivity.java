@@ -49,34 +49,38 @@ public class MainActivity extends AppCompatActivity {
         binding.recView.setAdapter(new MainAdapter(images));
 
         dialog = new ProgressDialog(this);
-        dialog.setMessage("loading...");
+        dialog.setMessage("please wait...");
         dialog.setCancelable(false);
 
         binding.recView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, final int position) {
-                if(ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 28);
-                    return;
-                }
-                dialog.show();
-                Observable.fromCallable(new Callable<Boolean>() {
-                    @Override
-                    public Boolean call() throws Exception {
-                        return downloadImage(images.get(position));
-                    }
-                }).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<Boolean>() {
-                            @Override
-                            public void accept(@NonNull Boolean aBoolean) throws Exception {
-                                String msg = aBoolean ? "Wallpaper successfully updated!" : "Sorry we have some problem!";
-                                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            }
-                        });
+                //action when image clicked
             }
         }));
+    }
+
+    public void setWallpaper(final int position){
+        if(ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 28);
+            return;
+        }
+        dialog.show();
+        Observable.fromCallable(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                return downloadImage(images.get(position));
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(@NonNull Boolean aBoolean) throws Exception {
+                        String msg = aBoolean ? "Wallpaper successfully updated!" : "Sorry we have some problem!";
+                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
     }
 
     private boolean downloadImage(String path) {
